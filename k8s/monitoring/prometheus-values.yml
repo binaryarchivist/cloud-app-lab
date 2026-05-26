@@ -1,20 +1,18 @@
 grafana:
   adminPassword: admin123
   persistence:
-    enabled: true
-    size: 5Gi
+    enabled: false
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      url: http://loki-stack:3100
+      access: proxy
+      isDefault: false    
 
 prometheus:
   prometheusSpec:
     serviceMonitorSelectorNilUsesHelmValues: false
     retention: 7d
-    storageSpec:
-      volumeClaimTemplate:
-        spec:
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 10Gi
 
 alertmanager:
   alertmanagerSpec:
