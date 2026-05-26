@@ -5,16 +5,7 @@ loki:
     size: 10Gi
 
 promtail:
-  enabled: true
-  config:
-    snippets:
-      pipelineStages:
-        - docker: {}
-  volumeMounts:
-    - name: pods
-      mountPath: /var/log/pods
-      readOnly: true
-  volumes:
-    - name: pods
-      hostPath:
-        path: /var/log/pods
+  enabled: false   
+
+fluent-bit:
+  enabled: false
