@@ -3,23 +3,15 @@
 ### Running the Application
 
 ```
-./gradlew bootRun
+npm install
+```
+
+```
+npm run dev
 ```
 
 Open [http://localhost:8080](http://localhost:8080) in your browser.
 
-### Building the Application
-
-```
-./gradlew bootJar
-```
-
-### Running the Application as a Docker Container
-
-```
-...
-java -jar ./build/libs/tech-challenge-0.0.1-SNAPSHOT.jar
-```
 
 ### Requirements
 
