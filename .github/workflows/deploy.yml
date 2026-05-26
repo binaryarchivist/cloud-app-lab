@@ -55,7 +55,7 @@ jobs:
 
       - name: Deploy app manifests
         run: |
-          kubectl apply -f k8s/service-monitor.yml
+          kubectl apply -f k8s/monitoring/service-monitor.yml
           kubectl set image deployment/myapp \
             myapp=europe-west1-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }}
           kubectl rollout status deployment/myapp
