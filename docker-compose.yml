@@ -5,3 +5,30 @@ services:
       - "3000:3000"
     environment:
       - PORT=3000
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=myappdb
+      - DB_USER=myappuser
+      - DB_PASSWORD=dbpassword
+    depends_on:
+      postgres:
+        condition: service_healthy  # wait for postgres to be ready before starting app
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=myappdb
+      - POSTGRES_USER=myappuser
+      - POSTGRES_PASSWORD=yourStrongPasswordHere123!
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data  # persist data between restarts
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myappuser -d myappdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres-data:
