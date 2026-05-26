@@ -8,7 +8,7 @@ const port = 3000;
 collectDefaultMetrics();
 
 app.get("/", (_req: Request, res: Response) => {
-  res.send("Hello world");
+  res.send("Hello world47");
 });
 
 app.get("/health", async (_req: Request, res: Response) => {
