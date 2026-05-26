@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+spec:
+  selector:
+    app: myapp          # routes traffic to pods with this label
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000  # your Express app port
+  type: ClusterIP       # internal only, Ingress handles external traffic
