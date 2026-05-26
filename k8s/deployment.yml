@@ -23,7 +23,7 @@ spec:
         - name: myapp
           image: europe-west1-docker.pkg.dev/cloud-lab-work-497422/myapp/myapp:latest
           ports:
-            - containerPort: 3000  # change to your Express app port
+            - containerPort: 3000 
           env:
             - name: NODE_ENV
               value: "production"
@@ -65,4 +65,3 @@ spec:
               port: 3000
             initialDelaySeconds: 15
             periodSeconds: 20
-            

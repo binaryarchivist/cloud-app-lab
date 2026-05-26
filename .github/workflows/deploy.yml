@@ -52,32 +52,10 @@ jobs:
           gcloud container clusters get-credentials ${{ env.CLUSTER_NAME }} \
             --region ${{ env.REGION }} \
             --project ${{ env.PROJECT_ID }}
-            
-      - name: Add Helm repos
-        run: |
-          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-          helm repo add grafana https://grafana.github.io/helm-charts
-          helm repo update
-
-      - name: Deploy Prometheus + Grafana
-        run: |
-          helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
-            --namespace monitoring \
-            --create-namespace \
-            --values k8s/monitoring/prometheus-values.yaml \
-            --wait
-
-      - name: Deploy Loki + Promtail
-        run: |
-          helm upgrade --install loki-stack grafana/loki-stack \
-            --namespace monitoring \
-            --create-namespace \
-            --values k8s/monitoring/loki-values.yaml \
-            --wait
 
       - name: Deploy app manifests
         run: |
-          kubectl apply -f k8s/servicemonitor.yaml
+          kubectl apply -f k8s/service-monitor.yaml
           kubectl set image deployment/myapp \
             myapp=europe-west1-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }}
           kubectl rollout status deployment/myapp

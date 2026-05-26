@@ -387,6 +387,7 @@ kubectl rollout status deployment/myapp
 
 During the rollout, repeatedly curl the app — it should never return an error:
 ```bash
+# http://34.110.157.222/
 while true; do curl -s http://EXTERNAL_IP/health; sleep 1; done
 ```
 
