@@ -108,6 +108,23 @@ steps:
         kubectl rollout status deployment/myapp
         ```
 
+```
+# Install Prometheus + Grafana
+helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
+  --namespace monitoring \
+  --create-namespace \
+  --values k8s/monitoring/prometheus-values.yml \
+  --wait
+```
+
+```
+# Install Loki + Promtail
+helm upgrade --install loki-stack grafana/loki-stack \
+  --namespace monitoring \
+  --create-namespace \
+  --values k8s/monitoring/loki-values.yml \
+  --wait
+```
 3. Docker image should be deployed to a Kubernetes cluster.
 4. Kubernetes cluster should be running on a cloud provider.
 5. Kubernetes cluster should be accessible from the internet.
